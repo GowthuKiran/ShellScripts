@@ -1,5 +1,7 @@
 # This script is to pass directory as an input and retrun the files count as output
 # Author: KiranKumar Chintha
+# Date: 15-08-25
+# Version: v1
 
 #!/bin/bash
 

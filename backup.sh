@@ -1,5 +1,7 @@
 # This script is to create backup folder and copy files into it
 # Author: KiranKumar Chintha
+# Date: 15-08-25
+# Version: v1
 
 #!/bin/bash
 # check file exits or not

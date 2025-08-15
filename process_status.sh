@@ -1,6 +1,7 @@
 # Check if a process like nginx or sshd is running, print "Running" or "Not Running".
 # Author: KiranKumar Chintha
 # Date: 15-08-25
+# Version: v1
 
 #!/bin/bash
 
