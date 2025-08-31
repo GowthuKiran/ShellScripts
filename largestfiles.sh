@@ -20,4 +20,6 @@ fi
 #cd $direcory && ls -lhs | sort -rh | head -n 5
 find $directory  -maxdepth 1 -type f -exec du -h {} + | sort -rh | head -n 5
 
+find $directort  -maxdepth 1 -type f -exec du -h {} + | sort -rh | head -n 5
+
 

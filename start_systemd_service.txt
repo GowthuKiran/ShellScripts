@@ -1,0 +1,13 @@
+Below are commands to start systemmd Service once you configured it (log_monitor.service)
+
+sudo sysyemctl daemon-reload
+sudo systemctl enable --now log_monitor.service
+
+# check whether it is running
+
+systemctl status log_monitor.service
+
+# To run your script always in the backgroound follow below steps
+1) save your script inside /usr/local/bin path
+2) configure service (eg. log_monitor.servce) inside /etc/systemd/system path
+3) follow the above commands to enable it

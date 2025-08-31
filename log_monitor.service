@@ -1,0 +1,16 @@
+[unit]
+Description=Log Monitoring script
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/log_monitoring.sh  # full path of your script and script should save in /usr/local/bin path
+Restart=Always
+User=ubuntu
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=log_monitor
+
+[Install]
+WantedBy=Multi-user.taget
+
+
