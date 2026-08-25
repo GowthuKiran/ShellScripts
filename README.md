@@ -7,4 +7,4 @@ These scripts will be helpful for most common usecases.
 
 Python equivalents for the shell scripts are available in:
 
-- `/home/runner/work/ShellScripts/ShellScripts/python_scripts`
+- `python_scripts/`

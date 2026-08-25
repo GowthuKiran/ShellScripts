@@ -18,7 +18,7 @@ def main() -> int:
 
     backup_dir = Path("backup")
     backup_dir.mkdir(parents=True, exist_ok=True)
-    backup_file = backup_dir / f"{source.name}_{datetime.now().strftime('%y%m%d_%H%M%S')}"
+    backup_file = backup_dir / f"{source.name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
     shutil.copy2(source, backup_file)
     print("Backup of given file is completed successfully")
     return 0

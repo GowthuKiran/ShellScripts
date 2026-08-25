@@ -3,10 +3,12 @@ from __future__ import annotations
 import argparse
 import re
 import time
+from collections.abc import Generator
 from pathlib import Path
 
 
-def follow(path: Path):
+def follow(path: Path) -> Generator[str, None, None]:
+    """Yield newly appended lines from a log file indefinitely."""
     with path.open("r", encoding="utf-8", errors="replace") as f:
         f.seek(0, 2)
         while True:

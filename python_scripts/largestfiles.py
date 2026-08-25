@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-from __future__ import annotations
 import sys
 from pathlib import Path
 
@@ -11,14 +10,14 @@ def main() -> int:
 
     directory = Path(sys.argv[1])
     if not directory.is_dir():
-        print("Given path is not a directory")
+        print("Given directory does not exist")
         return 1
 
-    file_count = sum(1 for p in directory.iterdir() if p.is_file())
-    if file_count > 0:
-        print(f"Number of files in the given directory are: {file_count}")
-    else:
-        print("There are no files in the given directory")
+    file_with_size = [(p, p.stat().st_size) for p in directory.iterdir() if p.is_file()]
+    top_files = sorted(file_with_size, key=lambda item: item[1], reverse=True)[:5]
+    for path, size in top_files:
+        size_mb = size / (1024 * 1024)
+        print(f"{size_mb:.2f} MB\t{path}")
     return 0
 
 
