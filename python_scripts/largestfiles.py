@@ -13,7 +13,14 @@ def main() -> int:
         print("Given directory does not exist")
         return 1
 
-    file_with_size = [(p, p.stat().st_size) for p in directory.iterdir() if p.is_file()]
+    file_with_size = []
+    for path in directory.iterdir():
+        if not path.is_file():
+            continue
+        try:
+            file_with_size.append((path, path.stat().st_size))
+        except PermissionError:
+            continue
     top_files = sorted(file_with_size, key=lambda item: item[1], reverse=True)[:5]
     for path, size in top_files:
         size_mb = size / (1024 * 1024)

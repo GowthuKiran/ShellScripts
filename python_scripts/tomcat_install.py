@@ -16,6 +16,14 @@ def run(cmd: list[str]) -> None:
     subprocess.run(cmd, check=True)
 
 
+def resolve_java_home() -> str:
+    java_bin = shutil.which("java")
+    if not java_bin:
+        return "/usr/lib/jvm/java-11-openjdk"
+    resolved = Path(java_bin).resolve()
+    return str(resolved.parent.parent)
+
+
 def main() -> int:
     print("### Updating system packages...")
     if Path("/etc/debian_version").exists():
@@ -42,6 +50,7 @@ def main() -> int:
     print("### Setting permissions...")
     run(["sudo", "chown", "-R", f"{TOMCAT_USER}:{TOMCAT_USER}", INSTALL_DIR])
 
+    java_home = resolve_java_home()
     service = f"""[Unit]
 Description=Apache Tomcat Web Application Container
 After=network.target
@@ -50,7 +59,7 @@ After=network.target
 Type=forking
 User={TOMCAT_USER}
 Group={TOMCAT_USER}
-Environment=\"JAVA_HOME=/usr/lib/jvm/java-11-openjdk\"
+Environment=\"JAVA_HOME={java_home}\"
 Environment=\"CATALINA_PID={INSTALL_DIR}/temp/tomcat.pid\"
 Environment=\"CATALINA_HOME={INSTALL_DIR}\"
 Environment=\"CATALINA_BASE={INSTALL_DIR}\"

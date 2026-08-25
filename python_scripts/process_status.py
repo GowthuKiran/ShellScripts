@@ -11,9 +11,9 @@ def main() -> int:
 
     result = subprocess.run(["pgrep", "-x", args.process_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     if result.returncode == 0:
-        print("Process is running")
+        print(f"Process '{args.process_name}' is running")
     else:
-        print("Process is not running")
+        print(f"Process '{args.process_name}' is not running")
     return 0
 
 

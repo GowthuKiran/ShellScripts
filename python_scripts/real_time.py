@@ -39,7 +39,7 @@ def main() -> int:
     print("🔹 4. Loop through services and check if running")
     services = ["sshd", "nginx", "docker"]
     for service in services:
-        status = subprocess.run(["systemctl", "is-active", "--quiet", service]).returncode
+        status = subprocess.run(["systemctl", "is-active", "--quiet", service], stderr=subprocess.DEVNULL).returncode
         if status == 0:
             print(f"✅ {service} is running")
         else:
