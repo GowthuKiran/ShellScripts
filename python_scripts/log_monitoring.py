@@ -34,6 +34,7 @@ def main() -> int:
         for pattern in compiled:
             if pattern.search(line):
                 print(f"ALERT: Pattern {pattern.pattern} found in log: {line}")
+                break
     return 0
 
 

@@ -20,6 +20,17 @@ def resolve_java_home() -> str:
     java_bin = shutil.which("java")
     if not java_bin:
         return "/usr/lib/jvm/java-11-openjdk"
+    proc = subprocess.run(
+        ["java", "-XshowSettings:properties", "-version"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE,
+        text=True,
+        check=False,
+    )
+    for line in proc.stderr.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("java.home ="):
+            return stripped.split("=", 1)[1].strip()
     resolved = Path(java_bin).resolve()
     return str(resolved.parent.parent)
 
@@ -36,7 +47,7 @@ def main() -> int:
         return 1
 
     print("### Creating Tomcat user...")
-    run(["sudo", "useradd", "-m", "-U", "-d", INSTALL_DIR, "-s", "/bin/false", TOMCAT_USER])
+    subprocess.run(["sudo", "useradd", "-m", "-U", "-d", INSTALL_DIR, "-s", "/bin/false", TOMCAT_USER], check=False)
 
     print("### Downloading Apache Tomcat...")
     os.chdir("/tmp")

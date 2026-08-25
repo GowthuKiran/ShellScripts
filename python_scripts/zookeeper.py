@@ -38,7 +38,6 @@ def main() -> int:
     os.chdir("/tmp")
     archive = f"apache-zookeeper-{ZOOKEEPER_VERSION}-bin.tar.gz"
     run(["wget", "-q", f"https://downloads.apache.org/zookeeper/zookeeper-{ZOOKEEPER_VERSION}/{archive}"])
-    run(["sudo", "mkdir", "-p", INSTALL_DIR])
     run(["sudo", "tar", "-xzf", archive, "--strip-components=1", "-C", INSTALL_DIR])
     run(["sudo", "chown", "-R", f"{USER}:{USER}", INSTALL_DIR])
 

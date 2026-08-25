@@ -13,6 +13,7 @@ def main() -> int:
         print("Given directory does not exist")
         return 1
 
+    # Match original shell behavior: scan only top-level files in the given directory.
     file_with_size = []
     for path in directory.iterdir():
         if not path.is_file():

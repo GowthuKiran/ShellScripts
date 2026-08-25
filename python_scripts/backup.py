@@ -14,7 +14,7 @@ def main() -> int:
 
     source = args.filename
     if not source.is_file():
-        print("file doesn't exist")
+        print(f"File not found: {source}")
         return 1
 
     backup_dir = args.backup_dir
